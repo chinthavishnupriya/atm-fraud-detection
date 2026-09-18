@@ -1,0 +1,36 @@
+ATM FRAUD DETECTION - EXECUTION OUTPUT
+======================================
+
+Environment:
+Java 17.0.20
+Scala 2.12.18
+Spark 3.5.6
+Kafka localhost:9092
+HBase 2.5.15-hadoop3
+
+1. Kafka Producer
+-----------------
+ATM Fraud Detection Kafka Producer
+Sending test transactions...
+
+Sent: {'transactionId': 'FRAUD001', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 5000, 'timestamp': '2026-09-18T05:18:11', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
+Sent: {'transactionId': 'FRAUD002', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 10000, 'timestamp': '2026-09-18T05:18:13', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
+Sent: {'transactionId': 'FRAUD003', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 15000, 'timestamp': '2026-09-18T05:18:15', 'location': 'Mumbai', 'pinStatus': 'SUCCESS'}
+Sent: {'transactionId': 'FRAUD004', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 20000, 'timestamp': '2026-09-18T05:18:17', 'location': 'Delhi', 'pinStatus': 'SUCCESS'}
+Sent: {'transactionId': 'FRAUD005', 'accountId': 'ACC102', 'customerId': 'CUST102', 'transactionType': 'WITHDRAWAL', 'amount': 75000, 'timestamp': '2026-09-18T05:18:20', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
+Sent: {'transactionId': 'FRAUD006', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:22', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
+Sent: {'transactionId': 'FRAUD007', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:24', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
+Sent: {'transactionId': 'FRAUD008', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:26', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
+Sent: {'transactionId': 'FRAUD009', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:28', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
+Sent: {'transactionId': 'FRAUD010', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 12000, 'timestamp': '2026-09-18T05:18:30', 'location': 'Chennai', 'pinStatus': 'SUCCESS'}
+
+All test transactions sent.
+2. Scala Compilation
+--------------------
+
+Command:
+sbt compile
+
+Output:
+[info] compiling 3 Scala sources to /home/vishnupriya/atm-fraud-detection/target/out/jvm/scala-2.12.18/bank-transaction-monitoring/classes ...
+[success] elapsed time: 6 s
