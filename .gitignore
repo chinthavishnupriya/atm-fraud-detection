@@ -1,0 +1,9 @@
+.venv/
+data/checkpoint/
+target/
+project/target/
+.bsp/
+.metals/
+.idea/
+*.jar
+lib/
