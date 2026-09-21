@@ -209,7 +209,7 @@ object KafkaStreamingProcessor {
         $"accountId"
       )
       .agg(
-        countDistinct($"location").alias("cityCount"),
+        approx_count_distinct($"location").alias("cityCount"),
         collect_set($"location").alias("cities")
       )
       .filter(
