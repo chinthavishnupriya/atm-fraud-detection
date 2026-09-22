@@ -2,7 +2,7 @@ ThisBuild / scalaVersion := "2.12.18"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "bank-transaction-monitoring",
+    name := "atm-fraud-detection",
     version := "1.0",
 
     libraryDependencies ++= Seq(
