@@ -1,36 +1,70 @@
 ATM FRAUD DETECTION - EXECUTION OUTPUT
 ======================================
 
-Environment:
-Java 17.0.20
-Scala 2.12.18
-Spark 3.5.6
-Kafka localhost:9092
-HBase 2.5.15-hadoop3
+Project: Real-Time ATM Fraud Detection
+Pipeline: Kafka -> Spark Structured Streaming -> HBase
 
-1. Kafka Producer
------------------
-ATM Fraud Detection Kafka Producer
-Sending test transactions...
+--------------------------------------
+1. KAFKA PRODUCER OUTPUT
+--------------------------------------
 
-Sent: {'transactionId': 'FRAUD001', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 5000, 'timestamp': '2026-09-18T05:18:11', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
-Sent: {'transactionId': 'FRAUD002', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 10000, 'timestamp': '2026-09-18T05:18:13', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
-Sent: {'transactionId': 'FRAUD003', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 15000, 'timestamp': '2026-09-18T05:18:15', 'location': 'Mumbai', 'pinStatus': 'SUCCESS'}
-Sent: {'transactionId': 'FRAUD004', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 20000, 'timestamp': '2026-09-18T05:18:17', 'location': 'Delhi', 'pinStatus': 'SUCCESS'}
-Sent: {'transactionId': 'FRAUD005', 'accountId': 'ACC102', 'customerId': 'CUST102', 'transactionType': 'WITHDRAWAL', 'amount': 75000, 'timestamp': '2026-09-18T05:18:20', 'location': 'Hyderabad', 'pinStatus': 'SUCCESS'}
-Sent: {'transactionId': 'FRAUD006', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:22', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
-Sent: {'transactionId': 'FRAUD007', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:24', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
-Sent: {'transactionId': 'FRAUD008', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:26', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
-Sent: {'transactionId': 'FRAUD009', 'accountId': 'ACC103', 'customerId': 'CUST103', 'transactionType': 'WITHDRAWAL', 'amount': 0, 'timestamp': '2026-09-18T05:18:28', 'location': 'Hyderabad', 'pinStatus': 'FAILED'}
-Sent: {'transactionId': 'FRAUD010', 'accountId': 'ACC101', 'customerId': 'CUST101', 'transactionType': 'WITHDRAWAL', 'amount': 12000, 'timestamp': '2026-09-18T05:18:30', 'location': 'Chennai', 'pinStatus': 'SUCCESS'}
+The Kafka producer successfully sent the following test transactions:
+
+FRAUD001 - ACC101 - Amount: 5000 - Hyderabad - SUCCESS
+FRAUD002 - ACC101 - Amount: 10000 - Hyderabad - SUCCESS
+FRAUD003 - ACC101 - Amount: 15000 - Mumbai - SUCCESS
+FRAUD004 - ACC101 - Amount: 20000 - Delhi - SUCCESS
+FRAUD005 - ACC102 - Amount: 75000 - Hyderabad - SUCCESS
+FRAUD006 - ACC103 - Amount: 0 - Hyderabad - FAILED
+FRAUD007 - ACC103 - Amount: 0 - Hyderabad - FAILED
+FRAUD008 - ACC103 - Amount: 0 - Hyderabad - FAILED
+FRAUD009 - ACC103 - Amount: 0 - Hyderabad - FAILED
+FRAUD010 - ACC101 - Amount: 12000 - Chennai - SUCCESS
 
 All test transactions sent.
-2. Scala Compilation
---------------------
 
-Command:
-sbt compile
+--------------------------------------
+2. FRAUD DETECTION OUTPUT
+--------------------------------------
 
-Output:
-[info] compiling 3 Scala sources to /home/vishnupriya/atm-fraud-detection/target/out/jvm/scala-2.12.18/bank-transaction-monitoring/classes ...
-[success] elapsed time: 6 s
+HIGH_VALUE_WITHDRAWAL
+Account: ACC102
+Amount: 75000
+
+MULTIPLE_WITHDRAWALS
+Account: ACC101
+Multiple withdrawal activity detected within the configured window.
+
+MULTIPLE_CITIES
+Account: ACC101
+Cities detected: Hyderabad, Mumbai, Delhi, Chennai
+City count: 4
+
+REPEATED_FAILED_PIN
+Account: ACC103
+Repeated failed PIN attempts detected.
+
+--------------------------------------
+3. HBASE OUTPUT
+--------------------------------------
+
+HBase table:
+suspicious_transactions
+
+Fraud categories stored:
+
+HIGH_VALUE_WITHDRAWAL
+MULTIPLE_WITHDRAWALS
+MULTIPLE_CITIES
+REPEATED_FAILED_PIN
+
+--------------------------------------
+4. RESULT
+--------------------------------------
+
+Kafka successfully received the ATM transactions.
+Spark Structured Streaming processed the transaction stream.
+The configured fraud detection rules identified suspicious activity.
+Detected fraud records were written to HBase.
+
+Pipeline completed successfully.
